@@ -1,0 +1,44 @@
+from django.db import models
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+    # about = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class SubCategory(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="subcategory")
+    name = models.CharField(max_length=255)
+    about = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    narx = models.FloatField(default=0)
+    kod = models.IntegerField(default=0)
+    miqdor = models.PositiveIntegerField(default=0)
+    miqdor_paket = models.PositiveIntegerField(default=1)
+    ekish_material_olcham = models.CharField(max_length=100, blank=True, null=True)
+    ekish_chuqurligi = models.CharField(max_length=100, blank=True, null=True)
+    masofa = models.CharField(max_length=100, blank=True, null=True)
+    balandlik = models.CharField(max_length=100, blank=True, null=True)
+    mahsulot_turi = models.CharField(max_length=255, blank=True, null=True)
+    mamlakat = models.CharField(max_length=100, blank=True, null=True)
+    sovuqqa_chiqamlilik = models.CharField(max_length=255, blank=True, null=True)
+    kesish = models.BooleanField(default=True)
+    gullash_davri = models.CharField(max_length=50, blank=True, null=True)
+    gullash_davri_tugashi = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+
+
