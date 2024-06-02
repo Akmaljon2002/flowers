@@ -47,3 +47,17 @@ def create_custom_user(request):
     return Response({'detail': 'Bad Request!',
                      'success': False,
                      'data': serializer.errors}, status=400)
+
+
+@login_custom_user_schema
+@api_view(["POST"])
+def login_user_token(request):
+    username = request.data.get('username')
+    password = request.data.get('password')
+    user = authenticate(username=username, password=password)
+    if user is None:
+        return Response({'detail': 'User not found', 'success': False}, status=404)
+    refresh = RefreshToken.for_user(user)
+    serialized_user = CustomUserSerializer(user).data
+    return Response({'refresh': str(refresh), 'access': str(refresh.access_token), 'user': serialized_user})
+

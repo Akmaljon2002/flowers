@@ -17,3 +17,4 @@ def get_categories(request):
     categories = Category.objects.all().order_by('-id')
     serializer = CategorySerializer1(categories, many=True)
     return Response(serializer.data, status=200)
+
