@@ -9,8 +9,17 @@ class Category(models.Model):
         return self.name
 
 
+class Category2(models.Model):
+    name = models.CharField(max_length=255)
+    about = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class SubCategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="subcategory")
+    category2 = models.ForeignKey(Category2, on_delete=models.CASCADE, related_name="subcategory", blank=True, null=True)
     name = models.CharField(max_length=255)
     about = models.TextField(blank=True, null=True)
     photo = models.ImageField(blank=True, null=True)
@@ -36,6 +45,14 @@ class Product(models.Model):
     kesish = models.BooleanField(default=True)
     gullash_davri = models.CharField(max_length=50, blank=True, null=True)
     gullash_davri_tugashi = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Banner(models.Model):
+    name = models.CharField(max_length=255, blank=True, null=True)
+    photo = models.ImageField()
 
     def __str__(self):
         return self.name

@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
-from product.models import Category, SubCategory
+from rest_framework import serializers
+from product.models import Category, SubCategory, Product, Category2, Banner
 
 
 class SubCategorySerializer(ModelSerializer):
@@ -28,3 +29,30 @@ class CategorySerializer1(ModelSerializer):
     class Meta:
         model = Category
         fields = ["id", "name", "subcategory"]
+
+
+class ProductSerializer(ModelSerializer):
+    class Meta:
+        model = Product
+        fields = "__all__"
+
+
+class ProductsResponseModel(serializers.Serializer):
+    count = serializers.IntegerField()
+    next = serializers.CharField()
+    previous = serializers.CharField()
+    results = ProductSerializer(many=True)
+
+
+class Category2Serializer(ModelSerializer):
+    subcategory = SubCategorySerializer(read_only=True, many=True)
+
+    class Meta:
+        model = Category2
+        fields = ["id", "name", "about", "subcategory"]
+
+
+class BannerSerializer(ModelSerializer):
+    class Meta:
+        model = Banner
+        fields = "__all__"
