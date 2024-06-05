@@ -58,5 +58,14 @@ class Banner(models.Model):
         return self.name
 
 
+class ProductPhoto(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_photo")
+    name = models.CharField(max_length=255, blank=True, null=True)
+    photo = models.ImageField(blank=True, null=True)
+
+    def __str__(self):
+        return self.product.name
+
+
 
 
