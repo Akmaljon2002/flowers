@@ -65,3 +65,19 @@ class BannerSerializer(ModelSerializer):
         model = Banner
         fields = "__all__"
 
+
+class NarxSer(serializers.Serializer):
+    dan = serializers.FloatField()
+    gacha = serializers.FloatField()
+
+
+class ProductsRequests(serializers.Serializer):
+    narx = NarxSer(required=False)
+    kesish = serializers.BooleanField(required=False)
+    mahsulot_turi = serializers.ListField(child=serializers.CharField(max_length=100))
+    rangi = serializers.ListField(child=serializers.CharField(max_length=100))
+    qonish_joyi = serializers.ListField(child=serializers.CharField(max_length=100))
+    gullash_oyi = serializers.ListField(child=serializers.CharField(max_length=100))
+    shahar = serializers.ListField(child=serializers.CharField(max_length=100))
+    sotib_olish_turi = serializers.ListField(child=serializers.CharField(max_length=100))
+

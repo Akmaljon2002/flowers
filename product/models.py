@@ -45,6 +45,9 @@ class Product(models.Model):
     kesish = models.BooleanField(default=True)
     gullash_davri = models.CharField(max_length=50, blank=True, null=True)
     gullash_davri_tugashi = models.CharField(max_length=50, blank=True, null=True)
+    qonish_joyi = models.CharField(max_length=255, blank=True, null=True)
+    sotib_olish_turi = models.CharField(max_length=255, blank=True, null=True)
+    rangi = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.name
