@@ -1,10 +1,10 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from product.models import Product, Category, Banner, Category2
+from product.models import Product, Category, Banner, Category2, AbouteProduct, Links, YoutubeVideo
 from product.schemas import get_category_schema, get_product_schema, get_banner_schema, get_category2_schema, \
-    get_product_detail_schema
+    get_product_detail_schema, get_aboute_product_schema, get_links_schema, get_youtube_schema
 from product.serializer import CategorySerializer1, ProductSerializer, BannerSerializer, Category2Serializer, \
-    ProductsRequests
+    ProductsRequests, AbouteProductSerializer, LinksSerializer, YoutubeSerializer
 from utils.pagination import paginate
 
 
@@ -83,6 +83,39 @@ def get_product(request):
     pr_id = request.query_params.get("product_id")
     product = Product.objects.filter(id=pr_id).first()
     serializer = ProductSerializer(product)
+    return Response(serializer.data, status=200)
+
+
+@get_aboute_product_schema
+@api_view(['GET'])
+def get_aboute_product(request):
+    """
+    Gullar haqida
+    """
+    about_products = AbouteProduct.objects.order_by('-id').all()
+    serializer = AbouteProductSerializer(about_products, many=True)
+    return Response(serializer.data, status=200)
+
+
+@get_links_schema
+@api_view(['GET'])
+def get_links(request):
+    """
+    Linklar
+    """
+    links = Links.objects.order_by('-id').all()
+    serializer = LinksSerializer(links, many=True)
+    return Response(serializer.data, status=200)
+
+
+@get_youtube_schema
+@api_view(['GET'])
+def get_youtube(request):
+    """
+    Youtube Video uchun
+    """
+    link = YoutubeVideo.objects.order_by('-id').first()
+    serializer = YoutubeSerializer(link)
     return Response(serializer.data, status=200)
 
 

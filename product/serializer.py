@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
-from product.models import Category, SubCategory, Product, Category2, Banner, ProductPhoto
+from product.models import Category, SubCategory, Product, Category2, Banner, ProductPhoto, AbouteProduct, Links, \
+    YoutubeVideo
 
 
 class SubCategorySerializer(ModelSerializer):
@@ -63,6 +64,24 @@ class Category2Serializer(ModelSerializer):
 class BannerSerializer(ModelSerializer):
     class Meta:
         model = Banner
+        fields = "__all__"
+
+
+class AbouteProductSerializer(ModelSerializer):
+    class Meta:
+        model = AbouteProduct
+        fields = "__all__"
+
+
+class LinksSerializer(ModelSerializer):
+    class Meta:
+        model = Links
+        fields = "__all__"
+
+
+class YoutubeSerializer(ModelSerializer):
+    class Meta:
+        model = YoutubeVideo
         fields = "__all__"
 
 

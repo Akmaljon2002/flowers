@@ -70,5 +70,35 @@ class ProductPhoto(models.Model):
         return self.product.name
 
 
+class AbouteProduct(models.Model):
+    title = models.CharField(max_length=255)
+    aboute = models.TextField()
+    photo = models.ImageField()
+
+    def __str__(self):
+        return self.title
+
+
+class Links(models.Model):
+    name = models.CharField(max_length=100)
+    link = models.CharField(max_length=255)
+    photo = models.ImageField()
+
+    def __str__(self):
+        return self.name
+
+
+class YoutubeVideo(models.Model):
+    title = models.CharField(max_length=255, blank=True, null=True)
+    link = models.CharField(max_length=255)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.link
+
+
+
+
+
 
 

@@ -2,7 +2,7 @@ from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 
 from product.serializer import CategorySerializer1, ProductSerializer, ProductsResponseModel, BannerSerializer, \
-    Category2Serializer, ProductsRequests
+    Category2Serializer, ProductsRequests, AbouteProductSerializer, LinksSerializer, YoutubeSerializer
 
 get_category_schema = extend_schema(
     summary="Categoriyalar",
@@ -35,6 +35,24 @@ get_product_detail_schema = extend_schema(
 get_banner_schema = extend_schema(
     summary="Bannerlar",
     responses=BannerSerializer(many=True)
+)
+
+
+get_aboute_product_schema = extend_schema(
+    summary="Gullar haqida",
+    responses=AbouteProductSerializer(many=True)
+)
+
+
+get_links_schema = extend_schema(
+    summary="Linkla",
+    responses=LinksSerializer(many=True)
+)
+
+
+get_youtube_schema = extend_schema(
+    summary="Youtube video uchun",
+    responses=YoutubeSerializer()
 )
 
 
